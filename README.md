@@ -15,7 +15,7 @@ And many more coming up!
 
 
 # Cheat commands
-Every command in this mod starts with a '/' symbol. 
+Every command in this mod starts with a '/' symbol. **Cheat commands only work in multiplayer!!** (will be fixed)
 List of added cheat commands with their description:
 - /ut (alias: /usetime) {integer} - Change UseTime of a handheld item
 - /ua (alias: /useanimation) {integer} - Change animation time of a handheld item
