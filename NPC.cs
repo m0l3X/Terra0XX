@@ -72681,7 +72681,7 @@ public class NPC : Entity
 		}
 	}
 
-	private void UpdateNetworkCode(int i)
+	public void UpdateNetworkCode(int i)
 	{
 		if (!active)
 			netUpdate = true;

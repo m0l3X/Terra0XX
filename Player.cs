@@ -39741,6 +39741,8 @@ public class Player : Entity, IFixLoadedData
 
 	private void FreeUpPetsAndMinions(Item sItem)
 	{
+		if (Main.player[Main.myPlayer].CustomGodmode)
+			return;
 		if (ProjectileID.Sets.MinionSacrificable[sItem.shoot]) {
 			List<int> list = new List<int>();
 			float num = 0f;
@@ -41685,7 +41687,7 @@ public class Player : Entity, IFixLoadedData
 		if (theItem.stack > 0) {
 			int num = Item.NewItem(source, (int)position.X, (int)position.Y, width, height, theItem.type);
 			Item obj = Main.item[num];
-			obj.netDefaults(theItem.netID);
+			//obj.netDefaults(theItem.netID);
 			obj.Prefix(theItem.prefix);
 			obj.stack = theItem.stack;
 			obj.velocity.Y = (float)Main.rand.Next(-20, 1) * 0.2f;

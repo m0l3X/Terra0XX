@@ -14582,7 +14582,11 @@ public class Main : Game
 				else
 					ChatHelper.SendChatMessageFromClient(message);
 			else if (netMode == 0)
-				ChatManager.Commands.ProcessIncomingMessage(message, myPlayer);
+				if (ChatCommandListenerAndExecutor.CheckCommand(text)) {
+
+				}
+				else
+					ChatManager.Commands.ProcessIncomingMessage(message, myPlayer);
 		}
 
 		chatText = "";
@@ -53357,6 +53361,7 @@ public class Main : Game
 
 	private static void UpdateServer()
 	{
+
 		netPlayCounter++;
 		if (netPlayCounter % 3600 == 0) {
 			NetMessage.SendData(7);

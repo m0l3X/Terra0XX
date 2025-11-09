@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Input;
 using Terraria.UI.Chat;
 using System.Windows.Input;
 using Terraria.GameContent.Animations;
+using Terraria.Net;
 namespace Terraria.Terra0XX;
 
 class ChatCommandListenerAndExecutor : Main
@@ -35,6 +36,7 @@ class ChatCommandListenerAndExecutor : Main
 			}
 			//base.Update(gameTime);
 		}
+		
 		try {
 			if (drawingPlayerChat) {
 
@@ -116,31 +118,62 @@ class ChatCommandListenerAndExecutor : Main
 					msg = "Changed UseTime to " + val + ". Prev: " + player[myPlayer].HeldItem.useTime.ToString();
 					col = Color.Gold;
 					player[myPlayer].HeldItem.useTime = int.Parse(val);
+					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/ar" or "/autoreuse": {
 					msg = "Changed AutoReuse to " + val + ". Prev: " + player[myPlayer].HeldItem.autoReuse.ToString();
 					col = Color.Gold;
 					player[myPlayer].HeldItem.autoReuse = bool.Parse(val);
+					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/ua" or "/useanimation": {
 					msg = "Changed UseAnimation to " + val + ". Prev: " + player[myPlayer].HeldItem.useTime.ToString();
 					col = Color.Gold;
 					player[myPlayer].HeldItem.useAnimation = int.Parse(val);
-
+					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/dmg" or "/damage": {
 					msg = "Changed item damage to " + val + ". Prev: " + player[myPlayer].HeldItem.damage.ToString();
 					col = Color.Gold;
 					player[myPlayer].HeldItem.damage = int.Parse(val);
-					
+					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem);
+
+					//player[myPlayer].HeldItem.useAmmo
 					break;
 				}
 				case "/i" or "/item": {
-					player[myPlayer].QuickSpawnItem(new EntitySource_ItemUse(player[myPlayer], player[myPlayer].HeldItem), int.Parse(val), count);
+					player[myPlayer].QuickSpawnItem(player[myPlayer].GetItemSource_Misc(player[myPlayer].HeldItem.type), int.Parse(val), count);
 					msg = "Spawned item " + val;
+					col = Color.Gold;
+					break;
+				}
+				case "/tb" or "/tileboost": {
+					player[myPlayer].HeldItem.tileBoost = int.Parse(val);
+					
+					msg = "Set tile boost to " + val;
+					col = Color.Gold;
+					break;
+				}
+				case "/makenpc" or "/mn": {
+					player[myPlayer].HeldItem.DefaultToCapturedCritter(short.Parse(val));
+					msg = "Making NPC: " + val;
+					col = Color.Gold;
+					break;
+				}
+				case "/summon": {
+					//player[myPlayer].QuickSpawnItem(player[myPlayer].GetItemSource_Misc(player[myPlayer].HeldItem.type), int.Parse(val), count);
+					for(int i = 0; i < count+1; i++) {
+						if(netMode == 0)
+							NPC.NewNPC(player[myPlayer].GetNPCSource_TileInteraction((int)MouseWorld.X, (int)MouseWorld.Y), (int)MouseWorld.X, (int)MouseWorld.Y, int.Parse(val));
+
+						else
+							NetMessage.SendData(61, -1, -1, null, myPlayer, int.Parse(val));
+
+					}
+					msg = "Summoned " + NPC.GetFullnameByID(int.Parse(val));
 					col = Color.Gold;
 					break;
 				}
@@ -183,6 +216,18 @@ class ChatCommandListenerAndExecutor : Main
 					}
 					break;
 				}
+				case "/id" or "/lookupid": {
+					Item.LookupID = bool.Parse(val);
+					msg = "Set ID lookup to " + val;
+					col = Color.Gold;
+					break;
+				}
+				case "/prid" or "/shoot": {
+					msg = "Changed projectile id to " + val + ". Prev: " + player[myPlayer].HeldItem.shoot.ToString();
+					col = Color.Gold;
+					player[myPlayer].HeldItem.shoot = int.Parse(val);
+					break;
+				}
 				case "/h" or "/help": {
 					msg = "List of avaiable commands: \n" +
 						"Form: 'Command, (alias), {input type(s)}, description' \n" +
@@ -192,7 +237,11 @@ class ChatCommandListenerAndExecutor : Main
 						"/i (/item) {integer} {integer} - Give player an item with specified ID (first argument) and count (second argument) \n" +
 						"/gm (/godmode) {true/false} - Enable/Disable godmode \n" +
 						"/mtp (/mousetp) {true/false} - Enable/Disable teleport to mouse pos on right mouse button \n" +
-						"/tp (/tp) {string} - Teleport player to the another one that contains given string in his name \n";
+						"/tp (/tp) {string} - Teleport player to the another one that contains given string in his name \n" +
+						"/dmg (/damage) {integer} - Change item's base damage \n" +
+						"/id (lookupid) {true/false} - Adds item's id to its tooltip \n" +
+						"/h (/help) - Show this list";
+
 					col = Color.LightBlue;
 					break;
 				}
