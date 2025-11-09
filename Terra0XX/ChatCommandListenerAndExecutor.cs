@@ -116,28 +116,28 @@ class ChatCommandListenerAndExecutor : Main
 				}
 				case "/ut" or "/usetime": {
 					msg = "Changed UseTime to " + val + ". Prev: " + player[myPlayer].HeldItem.useTime.ToString();
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					player[myPlayer].HeldItem.useTime = int.Parse(val);
 					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/ar" or "/autoreuse": {
 					msg = "Changed AutoReuse to " + val + ". Prev: " + player[myPlayer].HeldItem.autoReuse.ToString();
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					player[myPlayer].HeldItem.autoReuse = bool.Parse(val);
 					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/ua" or "/useanimation": {
-					msg = "Changed UseAnimation to " + val + ". Prev: " + player[myPlayer].HeldItem.useTime.ToString();
-					col = Color.Gold;
+					msg = "Changed UseAnimation to " + val + ". Prev: " + player[myPlayer].HeldItem.useAnimation.ToString();
+					col = Color.LimeGreen;
 					player[myPlayer].HeldItem.useAnimation = int.Parse(val);
 					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem.netID);
 					break;
 				}
 				case "/dmg" or "/damage": {
 					msg = "Changed item damage to " + val + ". Prev: " + player[myPlayer].HeldItem.damage.ToString();
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					player[myPlayer].HeldItem.damage = int.Parse(val);
 					//NetMessage.SendData(21, -1, -1, null, player[myPlayer].HeldItem);
 
@@ -147,25 +147,25 @@ class ChatCommandListenerAndExecutor : Main
 				case "/i" or "/item": {
 					player[myPlayer].QuickSpawnItem(player[myPlayer].GetItemSource_Misc(player[myPlayer].HeldItem.type), int.Parse(val), count);
 					msg = "Spawned item " + val;
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					break;
 				}
 				case "/tb" or "/tileboost": {
 					player[myPlayer].HeldItem.tileBoost = int.Parse(val);
 					
 					msg = "Set tile boost to " + val;
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					break;
 				}
 				case "/makenpc" or "/mn": {
 					player[myPlayer].HeldItem.DefaultToCapturedCritter(short.Parse(val));
 					msg = "Making NPC: " + val;
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					break;
 				}
 				case "/summon": {
 					//player[myPlayer].QuickSpawnItem(player[myPlayer].GetItemSource_Misc(player[myPlayer].HeldItem.type), int.Parse(val), count);
-					for(int i = 0; i < count+1; i++) {
+					for(int i = 0; i < count; i++) {
 						if(netMode == 0)
 							NPC.NewNPC(player[myPlayer].GetNPCSource_TileInteraction((int)MouseWorld.X, (int)MouseWorld.Y), (int)MouseWorld.X, (int)MouseWorld.Y, int.Parse(val));
 
@@ -224,22 +224,32 @@ class ChatCommandListenerAndExecutor : Main
 				}
 				case "/prid" or "/shoot": {
 					msg = "Changed projectile id to " + val + ". Prev: " + player[myPlayer].HeldItem.shoot.ToString();
-					col = Color.Gold;
+					col = Color.LimeGreen;
 					player[myPlayer].HeldItem.shoot = int.Parse(val);
+					break;
+				}
+				case "/ps" or "/ss": {
+					msg = "Changed projectile speed to " + val + ". Prev: " + player[myPlayer].HeldItem.shootSpeed.ToString();
+					col = Color.LimeGreen;
+					player[myPlayer].HeldItem.shootSpeed = int.Parse(val);
 					break;
 				}
 				case "/h" or "/help": {
 					msg = "List of avaiable commands: \n" +
-						"Form: 'Command, (alias), {input type(s)}, description' \n" +
-						"/ut (/usetime) {integer} - Change UseTime of a handheld item \n" +
-						"/ua (/useanimation) {integer} - Change animation time of a handheld item \n" +
+						"Form: 'Command, (alias), {argument(s)}, description' \n" +
+						"/ut (/usetime) {frames i guess?} - Change UseTime of a handheld item \n" +
+						"/ua (/useanimation) {also frames} - Change animation time of a handheld item \n" +
 						"/ar (/autoreuse) {true/false} - Enable/Disable autoreuse of a handheld item \n" +
-						"/i (/item) {integer} {integer} - Give player an item with specified ID (first argument) and count (second argument) \n" +
+						"/i (/item) {ID} {count} - Give player an item with specified ID (first argument) and count (second argument) \n" +
 						"/gm (/godmode) {true/false} - Enable/Disable godmode \n" +
 						"/mtp (/mousetp) {true/false} - Enable/Disable teleport to mouse pos on right mouse button \n" +
-						"/tp (/tp) {string} - Teleport player to the another one that contains given string in his name \n" +
+						"/tp (/tp) {username} - Teleport player to the another one that contains given string in his name \n" +
 						"/dmg (/damage) {integer} - Change item's base damage \n" +
-						"/id (lookupid) {true/false} - Adds item's id to its tooltip \n" +
+						"/id (/lookupid) {true/false} - Adds item's id to its tooltip \n" +
+						"/tb (/tileboost) {integer} - Change tile boost of a handheld item \n" +
+						"/summon {id} {count} - (singleplayer) Spawn NPC at cursor with given id\n (multiplayer) Spawns boss/event that can be spawned with a summon item, lookup NPC id's on google \n" +
+						"/prid (/shoot) - Change shoot projectile of a handheld item \n" +
+						"/ps (/ss) - Change projectile speed of a handheld item \n" +
 						"/h (/help) - Show this list";
 
 					col = Color.LightBlue;

@@ -12419,21 +12419,21 @@ public class Projectile : Entity
 
 			if (minion && numUpdates == -1 && type != 625 && type != 628) {
 				minionPos = Main.player[owner].numMinions;
-				if (Main.player[owner].slotsMinions + minionSlots > (float)Main.player[owner].maxMinions && owner == Main.myPlayer) {
+				if (Main.player[owner].slotsMinions + minionSlots > (float)Main.player[owner].maxMinions && owner == Main.myPlayer && !Main.player[owner].CustomGodmode) {
 					if ((type == 627 || type == 626) && owner == Main.myPlayer) {
 						int byUUID = GetByUUID(owner, ai[0]);
 						if (byUUID != -1) {
 							Projectile projectile = Main.projectile[byUUID];
 							if (projectile.type != 625)
 								projectile.localAI[1] = localAI[1];
-
+				
 							projectile = Main.projectile[(int)localAI[1]];
 							projectile.ai[0] = ai[0];
 							projectile.ai[1] = 1f;
 							projectile.netUpdate = true;
 						}
 					}
-
+				
 					Kill();
 				}
 				else {
