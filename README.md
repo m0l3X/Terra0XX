@@ -29,7 +29,7 @@ List of added cheat commands with their description:
 /tb (/tileboost) {integer} - Change tile boost of a handheld item
 /summon {id} {count} - (singleplayer) Spawn NPC at cursor with given id
                         (multiplayer) Spawns boss/event that can be spawned with a summon item, lookup NPC id's on google
-"prid (/shoot) - Change shoot projectile of a handheld item
+/prid (/shoot) - Change shoot projectile of a handheld item
 /ps (/ss) - Change projectile speed of a handheld item
 /h (/help) - Show this list
 
@@ -38,9 +38,5 @@ Simply put Terraria0XX.exe into terraria's installation folder and run it
 
 Add `-nosteam` launch argument to launch game without steam API.
 
-# Where's source code?
-I can't publish full source code of a project due to ReLogic's legal terms, but you can rebuild this mod with these steps:
-- Decompile terraria with official tmodloader guide: https://github.com/tModLoader/tModLoader/wiki/tModLoader-guide-for-contributors
-- Put files from this repository into /src/Terraria/Terraria/
-- Open .csproj with visual studio and build the mod
-Have fun and a nice day!
+I can't publish full source code of a project due to ReLogic's legal terms.
+
