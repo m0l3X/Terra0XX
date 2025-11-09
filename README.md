@@ -16,22 +16,23 @@ And many more coming up!
 
 # Cheat commands
 Every command in this mod starts with a '/' symbol. 
+
 List of added cheat commands with their description:
-/ut (/usetime) {frames i guess?} - Change UseTime of a handheld item
-/ua (/useanimation) {also frames} - Change animation time of a handheld item
-/ar (/autoreuse) {true/false} - Enable/Disable autoreuse of a handheld item
-/i (/item) {ID} {count} - Give player an item with specified ID (first argument) and count (second argument)
-/gm (/godmode) {true/false} - Enable/Disable godmode
-/mtp (/mousetp) {true/false} - Enable/Disable teleport to mouse pos on right mouse button
-/tp (/tp) {username} - Teleport player to the another one that contains given string in his name
-/dmg (/damage) {integer} - Change item's base damage
-/id (/lookupid) {true/false} - Adds item's id to its tooltip
-/tb (/tileboost) {integer} - Change tile boost of a handheld item
-/summon {id} {count} - (singleplayer) Spawn NPC at cursor with given id
+- /ut (/usetime) {frames i guess?} - Change UseTime of a handheld item
+- /ua (/useanimation) {also frames} - Change animation time of a handheld item
+- /ar (/autoreuse) {true/false} - Enable/Disable autoreuse of a handheld item
+- /i (/item) {ID} {count} - Give player an item with specified ID (first argument) and count (second argument)
+- /gm (/godmode) {true/false} - Enable/Disable godmode
+- /mtp (/mousetp) {true/false} - Enable/Disable teleport to mouse pos on right mouse button
+- /tp (/tp) {username} - Teleport player to the another one that contains given string in his name
+- /dmg (/damage) {integer} - Change item's base damage
+- /id (/lookupid) {true/false} - Adds item's id to its tooltip
+- /tb (/tileboost) {integer} - Change tile boost of a handheld item
+- /summon {id} {count} - (singleplayer) Spawn NPC at cursor with given id
                         (multiplayer) Spawns boss/event that can be spawned with a summon item, lookup NPC id's on google
-/prid (/shoot) - Change shoot projectile of a handheld item
-/ps (/ss) - Change projectile speed of a handheld item
-/h (/help) - Show this list
+- /prid (/shoot) - Change shoot projectile of a handheld item
+- /ps (/ss) - Change projectile speed of a handheld item
+- /h (/help) - Show this list
 
 # Installation
 Simply put Terraria0XX.exe into terraria's installation folder and run it
